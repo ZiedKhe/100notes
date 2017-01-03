@@ -122,11 +122,11 @@ Attention sous Github le centrage n'est pas reconnu, donc ne pas utiliser la tec
 
 >Nom|Prenom|Age|
 >------|---|---|
->Kheriji|Zied|36|
+>Doe|John|36|
 
 Nom|Prenom|Age|
 ------|---|---|
-|Kheriji|Zied|36|
+|Doe|John|36|
 
 ## Checkbox
 
