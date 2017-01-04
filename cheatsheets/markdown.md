@@ -59,7 +59,8 @@ conseil : pas la peine de faire une vraie numerotation incrementale ... ainsi si
 1. pain
 
 
-Nested lists : Pour faire des liste indentées, il suffit de faire une tabulation ou des espaces
+Nested lists : Pour faire des liste indentées, il suffit de faire une tabulation ou des espaces <br>
+
 1. maison
     - salon
     - sdb
@@ -121,11 +122,11 @@ Attention sous Github le centrage n'est pas reconnu, donc ne pas utiliser la tec
 
 >Nom|Prenom|Age|
 >------|---|---|
->Kheriji|Zied|36|
+>Doe|John|36|
 
 Nom|Prenom|Age|
 ------|---|---|
-|Kheriji|Zied|36|
+|Doe|John|36|
 
 ## Checkbox
 
