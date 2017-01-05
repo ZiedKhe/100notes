@@ -1,38 +1,35 @@
-const express = require('express')
-const app = express()
+const path = require("path")
+const express = require("express");
+const app = express();
+const ejs = require ('ejs')
+const port = 3000
 
+app.get("/exchange", function(req,res){
+	console.log("Exchange Shift");
+	res.render("exchange.ejs");
+});
 
-app.get('/', function(req,res){
-	console.log('catch all');
-	res.send('Welcome to the root')
+app.get("/exchange/all", function(req,res){
+	res.render('exchange_all.ejs');
 })
 
-app.get('/speak/:name', function(req,res){
-	var name = req.params.name;
-	var sounds = {
-		pig : 'oink',
-		dog : 'woof',
-		you : 'blurp'
-	}
-		res.send(name + ' : ' + sounds[name])
-	}
-)
-
-app.get('/repeat/:word/:times', function(req,res){
-	let word = req.params.word;
-	let times = req.params.times;
-	let sentence = '';
-	for(var i = 0; i<times; i++){
-		(sentence += word + ' ');
-	}
-	res.send(sentence)
+app.get("/exchange/:exchangeID", function(req,res){
+	var exchangeID = req.params.exchangeID;
+	res.render('exchange_details.ejs',{exchangeIDVal : exchangeID});
 })
 
-app.get('*', function (req,res){
-	res.send('nope');
+app.get("/info", (req,res) => { 
+	res.render('home',{
+		name:"john"
+	})
 })
 
-app.listen(3000,(err)=> {
+app.get("*", function(req,res){
+	console.log("request to catch all");
+	res.send("All other routes")
+})
+
+app.listen(port,(err)=> {
 	if(err){
 		return console.log("an error happened with the server",err)
 	}
