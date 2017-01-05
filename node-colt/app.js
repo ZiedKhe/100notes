@@ -18,12 +18,6 @@ app.get("/exchange/:exchangeID", function(req,res){
 	res.render('exchange_details.ejs',{exchangeIDVal : exchangeID});
 })
 
-app.get("/info", (req,res) => { 
-	res.render('home',{
-		name:"john"
-	})
-})
-
 app.get("*", function(req,res){
 	console.log("request to catch all");
 	res.send("All other routes")
