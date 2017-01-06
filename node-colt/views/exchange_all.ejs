@@ -10,7 +10,13 @@
 	<h1>Bienvenue sur l'outil d'echange de créneaux</h1>
 	<h3>Liste de toutes les demandes d'échanges</h3>
 
-	
+	<% exchanges.forEach(function(exchange){ %>
+
+		<li> 
+		<%=exchange.member %> - <%=exchange.date %> - <%=exchange.shift %> 
+		<button> Reserver </button>
+		</li>
+	<% }) %>
 
 </body>
 </html>

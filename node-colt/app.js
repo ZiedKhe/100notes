@@ -1,18 +1,18 @@
 const path = require("path")
 const express = require("express");
-var RedisStore =  require('connect-redis')(express)
+// var RedisStore =  require('connect-redis')(express)
 const app = express();
 const ejs = require ('ejs')
 const port = 3000
 
-app.use(express.session({store: new RedisStore}));
+// app.use(express.session({store: new RedisStore}));
 
 
-app.use(express.session({ store: new RedisStore({
-  host:'127.0.0.1',
-  port:6380,
-  prefix:'sess'
-}), secret: 'SEKR37' }));
+// app.use(express.session({ store: new RedisStore({
+//   host:'127.0.0.1',
+//   port:6380,
+//   prefix:'sess'
+// }), secret: 'SEKR37' }));
 
 app.get("/exchange", function(req,res){
 	console.log("Exchange Shift");
@@ -20,7 +20,15 @@ app.get("/exchange", function(req,res){
 });
 
 app.get("/exchange/all", function(req,res){
-	res.render('exchange_all.ejs');
+	var exchanges = [
+	{number : 312, member : 98, shift: "6h-8h15", date : "15 mai 1980" },
+	{number : 315, member : 930, shift: "6h-8h15", date : "15 mai 1980" },
+	{number : 334, member : 2341, shift: "6h-8h15", date : "15 mai 1980" },
+	{number : 335, member : 21, shift: "6h-8h15", date : "16 mai 1980" },
+	{number : 336, member : 2345, shift: "6h-8h15", date : "20 mai 1980" },
+	{number : 340, member : 221, shift: "6h-8h15", date : "22 mai 1980" }
+	];
+	res.render('exchange_all.ejs', {exchanges:exchanges});
 })
 
 app.get("/exchange/:exchangeID", function(req,res){
