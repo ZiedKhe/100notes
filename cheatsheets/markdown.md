@@ -97,7 +97,7 @@ Pour séparer 2 bloc de quotes avec un espace il faut sauter 2 lignes
 Pour ajouter un bloc de code on utilise ``` par défaut mais on peut aussi spécifier le language ```js <br>
 inline syntax highlighting  ` `un bout de code` ` <br>
 
-```
+```js
 var x = 5;
 var http =require ('http')
 var httpserv = http()
