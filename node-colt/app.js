@@ -14,6 +14,9 @@ const port = 3000
 //   prefix:'sess'
 // }), secret: 'SEKR37' }));
 
+// Serve the static content of "public" directory
+app.use(express.static('public'));
+
 app.get("/exchange", function(req,res){
 	console.log("Exchange Shift");
 	res.render("exchange.ejs");
