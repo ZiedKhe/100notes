@@ -7,7 +7,11 @@
 
 		<li> 
 		<%=exchange.member %> - <%=exchange.date %> - <%=exchange.shift %> 
-		<button> Reserver </button>
+		
+		<form action="/proposeSwitch" method="POST">
+			<button> Reserver </button>
+		</form>
+		
 		</li>
 	<% }) %>
 

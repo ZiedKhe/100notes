@@ -3,5 +3,9 @@
 <h1> Echange de créneaux</h1>
 
 <% myShift.forEach(function(shift){ %>
-	<li> <%= shift.date %> - <%=shift.shift %> </li>
+	<li> <%= shift.date %> - <%=shift.shift %> 
+	<% if (shift.status === 'reserved'){ %>
+	- <strong> <%=shift.status%> </strong> 
+	<% } %>
+	</li>
 <% }) %>
