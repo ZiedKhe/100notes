@@ -17,9 +17,16 @@ const port = 3000
 // Serve the static content of "public" directory
 app.use(express.static('public'));
 
+
+var myShift = [
+	{number : 312, member : 98, shift: "6h-8h15", date : "15 mai 1980" },
+	{number : 313, member : 98, shift: "6h-8h15", date : "15 mai 1980" },
+	{number : 314, member : 98, shift: "6h-8h15", date : "15 mai 1980" }
+	]
+
 app.get("/exchange", function(req,res){
 	console.log("Exchange Shift");
-	res.render("exchange.ejs");
+	res.render("exchange.ejs", {myShift : myShift});
 });
 
 app.get("/exchange/all", function(req,res){

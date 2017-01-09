@@ -1,1 +1,7 @@
+<% include partials/header.ejs %>
+
 <h1> Echange de créneaux</h1>
+
+<% myShift.forEach(function(shift){ %>
+	<li> <%= shift.date %> - <%=shift.shift %> </li>
+<% }) %>
