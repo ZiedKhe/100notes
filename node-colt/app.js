@@ -1,7 +1,7 @@
 const path = require("path")
 const express = require("express");
 // var RedisStore =  require('connect-redis')(express)
-//const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const app = express();
 const ejs = require ('ejs');
 const port = 3000;
@@ -14,7 +14,8 @@ const port = 3000;
 //   prefix:'sess'
 // }), secret: 'SEKR37' }));
 
-
+// Add body parser
+app.use(bodyParser.urlencoded({extended: true}));
 // Serve the static content of "public" directory
 app.use(express.static('public'));
 
