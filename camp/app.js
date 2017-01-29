@@ -3,19 +3,29 @@ const app = express ();
 const ejs = require ('ejs');
 const bodyParser = require('body-parser');
 const port = 3000;
+const mongoose = require('mongoose');
 
-// Add body parser
-app.use(bodyParser.urlencoded({extended: true}));
-
-// RENDERING IN EJS
-app.set ("view engine", "ejs");
+// MongoDB connection
+mongoose.connect("mongodb://localhost/facecamp");
+// Basics
+app.use(bodyParser.urlencoded({extended: true})); // Add body parser
+app.set ("view engine", "ejs"); // RENDERING IN EJS
 
 // TEMPORARY TEST DATA
-	var campgrounds = [
-		{name : "La Fraie", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154213/North-Bend-Park-Campground.jpg"},
-		{name : "Rochette", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154212/CN10111903V_018.jpg"},
-		{name : "Haut Lac", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154212/Mount-Rogers-and-Whitetop-Mountain.jpg"}
-	]
+	// var campgrounds = [
+	// 	{name : "La Fraie", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154213/North-Bend-Park-Campground.jpg"},
+	// 	{name : "Rochette", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154212/CN10111903V_018.jpg"},
+	// 	{name : "Haut Lac", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154212/Mount-Rogers-and-Whitetop-Mountain.jpg"}
+	// ]
+
+//MongoDB Schema definitions
+var campSchema = mongoose.Schema({
+	name : String,
+	image : String
+});
+
+var Campground = mongoose.model('Campground',campSchema);
+
 
 // ROUTES
 
@@ -24,9 +34,15 @@ app.get('/', function(req,res){
 });
 
 app.get('/campgrounds', function(req,res){
+	Campground.find({}, function (err, allCampgrounds){
+		if(err){
+			console.log("Error while retrieving Campgrounds in the database")
+		} else {
+			res.render('campgrounds', {campgrounds : allCampgrounds})
+		}
+	})
 
 
-	res.render('campgrounds', {campgrounds : campgrounds})
 });
 
 
@@ -34,8 +50,15 @@ app.post('/campgrounds', function(req,res){
 	var name = req.body.name;
 	var image = req.body.image;
 	var newcampground = {name:name, image:image};
-	campgrounds.push(newcampground);
-	res.redirect('/campgrounds');
+	//campgrounds.push(newcampground);
+	Campground.create(newcampground, function (err, newlyCreated){
+		if(err){
+			console.log('Error while writing new Campground to the database')
+		} else {
+			res.redirect('/campgrounds');
+		}
+	})
+
 })
 
 app.get('/campgrounds/new' , function(req,res){
