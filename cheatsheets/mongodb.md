@@ -4,7 +4,7 @@
 ```
 /etc/mongod.conf
 ```
-where <port> is configured by default : 27017
+where \<port\> is configured by default : 27017
 
 ### Start MongoDB
 ```
@@ -27,7 +27,7 @@ sudo service mongod restart
 ```
 
 ### Useful Links
-[Notes : Install Mongo in Production]("https://docs.mongodb.com/manual/administration/production-notes/")
+[Notes : Install Mongo in Production](https://docs.mongodb.com/manual/administration/production-notes/)
 
 
 ## Using Mongo in NodeJS with Mongoose
