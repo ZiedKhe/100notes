@@ -24,9 +24,15 @@ var campSchema = mongoose.Schema({
 	image : String,
 	description : String
 });
-
 var Campground = mongoose.model('Campground',campSchema);
 
+var blogSchema = mongoose.Schema({
+	title : String,
+	image : String,
+	body : String,
+	created : {type:Date, default:Date.now}
+})
+var Blog = mongoose.model('Blog', blogSchema);
 
 // ROUTES
 
@@ -78,6 +84,48 @@ app.get('/campgrounds/:id' , function (req,res){
 	})
 
 })
+
+
+app.get('/blog', function (req,res){
+	Blog.find({}, function (err,allPosts){
+		if (err){
+			console.log("Error while retrieving all Posts from database")
+		} else {
+			res.render('blogIndex', allPosts);
+		}
+	})
+	
+})
+
+app.get('/blog/new', function(req,res){
+	res.render('blogNew')
+})
+
+app.post('/blog', function(req,res){
+	var title = req.params.title;
+	var image = req.params.image;
+	var body = req.params.body;
+	var newPost = {title:title,image:image,body:body};
+	Blog.create(newPost, function(err,newlyPosted){
+		if(err){
+			console.log('Error while creating a new Blog Post in the database')
+		} else {
+			res.redirect("/blog");
+		}
+	})
+})
+
+app.get('blog/:id', function(req,res){
+	Blog.findById(req.params.id, function (err,foundPost){
+		if(err){
+			console.log("Error while retrieving Blog Post")
+		} else {
+			res.render('blogShow', {post:foundPost})
+		}
+	})
+})
+
+
 // SERVER
 
 app.listen(port,(err)=> {
