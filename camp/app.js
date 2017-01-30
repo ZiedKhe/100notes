@@ -64,6 +64,17 @@ app.post('/campgrounds', function(req,res){
 app.get('/campgrounds/new' , function(req,res){
 	res.render('new');
 })
+
+app.get('/campgrounds/:id' , function (req,res){
+	Campground.findById(req.params.id, function(err, foundCampground){
+		if(err){
+			console.log("Error while retrieving campground details")
+		} else {
+			res.render('show', {campground : foundCampground})
+		}
+	})
+
+})
 // SERVER
 
 app.listen(port,(err)=> {
