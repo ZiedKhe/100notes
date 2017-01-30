@@ -21,7 +21,8 @@ app.set ("view engine", "ejs"); // RENDERING IN EJS
 //MongoDB Schema definitions
 var campSchema = mongoose.Schema({
 	name : String,
-	image : String
+	image : String,
+	description : String
 });
 
 var Campground = mongoose.model('Campground',campSchema);
@@ -49,12 +50,14 @@ app.get('/campgrounds', function(req,res){
 app.post('/campgrounds', function(req,res){
 	var name = req.body.name;
 	var image = req.body.image;
-	var newcampground = {name:name, image:image};
+	var description = req.body.desc;
+	var newcampground = {name:name, image:image, description:description};
 	//campgrounds.push(newcampground);
 	Campground.create(newcampground, function (err, newlyCreated){
 		if(err){
 			console.log('Error while writing new Campground to the database')
 		} else {
+			console.log(newlyCreated);
 			res.redirect('/campgrounds');
 		}
 	})
