@@ -91,7 +91,7 @@ app.get('/blog', function (req,res){
 		if (err){
 			console.log("Error while retrieving all Posts from database")
 		} else {
-			res.render('blogIndex', allPosts);
+			res.render('blogIndex', {allPosts:allPosts});
 		}
 	})
 	
@@ -102,14 +102,15 @@ app.get('/blog/new', function(req,res){
 })
 
 app.post('/blog', function(req,res){
-	var title = req.params.title;
-	var image = req.params.image;
-	var body = req.params.body;
+	var title = req.body.title;
+	var image = req.body.image;
+	var body = req.body.body;
 	var newPost = {title:title,image:image,body:body};
 	Blog.create(newPost, function(err,newlyPosted){
 		if(err){
 			console.log('Error while creating a new Blog Post in the database')
 		} else {
+			console.log(newlyPosted);
 			res.redirect("/blog");
 		}
 	})
