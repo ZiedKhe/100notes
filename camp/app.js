@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 // MongoDB connection
 mongoose.connect("mongodb://localhost/facecamp");
 // Basics
+app.use(express.static('public')) // serve static files in public directory
 app.use(bodyParser.urlencoded({extended: true})); // Add body parser
 app.set ("view engine", "ejs"); // RENDERING IN EJS
 
