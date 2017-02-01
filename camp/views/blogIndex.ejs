@@ -1,17 +1,9 @@
 <% include partials/blogHeader %>
 
-<div class='ui inverted menu'>
-	<a class="item" href=""><i class='code icon'></i> Blog</a>
-	<a class="item" href="">New Post</a>
-	<a class="item" href="">Contact</a>
-	<div class='right menu'>
-		<a href="" class='item'>Login</a>
-	</div>
-</div>
-
 
 <% allPosts.forEach(function(post){ %>
 	<h3> <%= post.title %> </h3>
+	<img src="<%= post.image %>" alt="">
 	<p> <%= post.body %> </p>
 
 <% }) %>

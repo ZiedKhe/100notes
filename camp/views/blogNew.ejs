@@ -1,6 +1,29 @@
 <% include partials/blogHeader %>
 
-<div class='container'>
+<div class = 'ui container main text segment'>
+	<div class="ui huge header">New Blog post</div>
+	<form class="ui form" action="/blog" method='POST'>
+		<div class='field'>
+			<label>Title</label>
+			<input type="text" name='blog[title]' placeholder='Title'>
+		</div>
+		<div class='field'>
+			<label>Title</label>
+			<input type="text" name='blog[image]' placeholder='Image'>
+		</div>
+		<div class='field'>
+			<label>Title</label>
+			<textarea name='blog[image]'></textarea>
+		</div>
+
+		<input class='ui big button blue basic right'  type="submit">
+	</form>
+</div>
+
+
+
+	
+<!-- <div class='container'>
 	<div class='row'>
 		<h1 style='text-align: center'>Add a new Blog Post</h1>
 		<div style='width:70%; margin:30px auto'>
@@ -21,6 +44,6 @@
 		<a href="/campgrounds">Back to camp list</a>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <% include partials/blogFooter %>

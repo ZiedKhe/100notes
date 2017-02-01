@@ -103,11 +103,8 @@ app.get('/blog/new', function(req,res){
 })
 
 app.post('/blog', function(req,res){
-	var title = req.body.title;
-	var image = req.body.image;
-	var body = req.body.body;
-	var newPost = {title:title,image:image,body:body};
-	Blog.create(newPost, function(err,newlyPosted){
+
+	Blog.create(req.body.blog, function(err,newlyPosted){
 		if(err){
 			console.log('Error while creating a new Blog Post in the database')
 		} else {
