@@ -1,12 +1,22 @@
 <% include partials/blogHeader %>
 
+<div class='ui container'>
 
-<% allPosts.forEach(function(post){ %>
+	<% allPosts.forEach(function(post){ %>
 	<h3> <%= post.title %> </h3>
 	<img src="<%= post.image %>" alt="">
-	<p> <%= post.body %> </p>
+	<p> <%= post.body.substring(0,100)%> </p>
+	<a href="/blog/<%=post._id %>">Read More</a>
 
-<% }) %>
+<% }) %>	
+
+
+
+
+
+
+</div>
+
 
 <% include partials/blogFooter %>
 

@@ -114,7 +114,7 @@ app.post('/blog', function(req,res){
 	})
 })
 
-app.get('blog/:id', function(req,res){
+app.get('/blog/:id', function(req,res){
 	Blog.findById(req.params.id, function (err,foundPost){
 		if(err){
 			console.log("Error while retrieving Blog Post")
