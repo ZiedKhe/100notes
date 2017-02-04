@@ -4,13 +4,15 @@ const ejs = require ('ejs');
 const bodyParser = require('body-parser');
 const port = 3000;
 const mongoose = require('mongoose');
-const methodoverride = require('method-override')
+const methodoverride = require('method-override');
+const expressSanitizer = require('express-sanitizer');
 
 // MongoDB connection
 mongoose.connect("mongodb://localhost/facecamp");
 // Basics
 app.use(express.static('public')) // serve static files in public directory
 app.use(bodyParser.urlencoded({extended: true})); // Add body parser
+app.use(expressSanitizer()); // MUST be placed AFTER bodyParser
 app.set ("view engine", "ejs"); // RENDERING IN EJS
 app.use(methodoverride('_method'))
 
@@ -105,7 +107,7 @@ app.get('/blog/new', function(req,res){
 })
 
 app.post('/blog', function(req,res){
-
+	req.body.blog.body = req.sanitize(req.body.blog.body);
 	Blog.create(req.body.blog, function(err,newlyPosted){
 		if(err){
 			console.log('Error while creating a new Blog Post in the database')
@@ -138,6 +140,7 @@ app.get('/blog/:id/edit', function(req, res){
 })
 
 app.put('/blog/:id', function(req,res){
+	req.body.blog.body = req.sanitize(req.body.blog.body);
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, foundPost){
 		if(err){
 			res.redirect('/blog')
