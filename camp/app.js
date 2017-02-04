@@ -4,6 +4,7 @@ const ejs = require ('ejs');
 const bodyParser = require('body-parser');
 const port = 3000;
 const mongoose = require('mongoose');
+const methodoverride = require('method-override')
 
 // MongoDB connection
 mongoose.connect("mongodb://localhost/facecamp");
@@ -11,6 +12,7 @@ mongoose.connect("mongodb://localhost/facecamp");
 app.use(express.static('public')) // serve static files in public directory
 app.use(bodyParser.urlencoded({extended: true})); // Add body parser
 app.set ("view engine", "ejs"); // RENDERING IN EJS
+app.use(methodoverride('_method'))
 
 // TEMPORARY TEST DATA
 	// var campgrounds = [
@@ -118,12 +120,42 @@ app.get('/blog/:id', function(req,res){
 	Blog.findById(req.params.id, function (err,foundPost){
 		if(err){
 			console.log("Error while retrieving Blog Post")
+			console.log('req.params.id')
 		} else {
 			res.render('blogShow', {post:foundPost})
 		}
 	})
 })
 
+app.get('/blog/:id/edit', function(req, res){
+	Blog.findById(req.params.id, function(err,foundPost){
+		if (err){
+			res.redirect('/blog');
+		} else {
+			res.render('blogEdit',{post:foundPost})
+		}
+	})
+})
+
+app.put('/blog/:id', function(req,res){
+	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, foundPost){
+		if(err){
+			res.redirect('/blog')
+		} else {
+			res.redirect('/blog/'+req.params.id)
+		}
+	})
+})
+
+app.delete('/blog/:id', function(req,res){
+	Blog.findByIdAndRemove(req.params.id, function(err, foundPost){
+		if (err){
+			res.redirect('/blog/'+req.params.id)
+		} else {
+			res.redirect('/blog')
+		}
+	})
+})
 
 // SERVER
 

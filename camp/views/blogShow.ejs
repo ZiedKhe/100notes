@@ -16,8 +16,11 @@
 			</div>
 		</div>
 	</div>
+	<a class="ui blue button basic" href="/blog/<%=post._id%>/edit">Edit</a>
 
-
+	<form id='delete' action="/blog/<%=post._id%>?_method=DELETE" method='POST'>
+		<button class='ui red basic button'>Delete</button>
+	</form>
 
 </div>
 
