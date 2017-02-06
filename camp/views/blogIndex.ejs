@@ -1,7 +1,7 @@
 <% include partials/blogHeader %>
 
 <div class='ui main text container'>
-	<div class='ui big header'>A blog on Node</div>
+	<div class='ui huge header'>A blog on Node</div>
 
 	<div class='ui top attached segment'>
 	<div class='ui divided items'>
@@ -11,9 +11,11 @@
 			<div class='image'> <img src="<%= post.image %>" alt=""> </div>
 			<div class='content'> 
 				<a class='header' href='/blog/<%=post._id%>'><%= post.title %> </a>
-				</div>
+			<div class="meta">
+				<span class="meta"><%=post.created.toDateString() %></span>
+			</div>
 			<div class='description'> 
-				<p><%= post.body.substring(0,100)%> ...</p>
+				<p><%- post.body.substring(0,100)%> ...</p>
 			</div>
 			<div class='extra'>
 				<a class = 'ui floated basic button black' href="/blog/<%=post._id %>"> Read More </a>

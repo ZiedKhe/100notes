@@ -6,6 +6,8 @@ const port = 3000;
 const mongoose = require('mongoose');
 const methodoverride = require('method-override');
 const expressSanitizer = require('express-sanitizer');
+var Campground = require('./models/campgrounds');
+var seedDB = require('./seeds');
 
 // MongoDB connection
 mongoose.connect("mongodb://localhost/facecamp");
@@ -24,12 +26,7 @@ app.use(methodoverride('_method'))
 	// ]
 
 //MongoDB Schema definitions
-var campSchema = mongoose.Schema({
-	name : String,
-	image : String,
-	description : String
-});
-var Campground = mongoose.model('Campground',campSchema);
+
 
 var blogSchema = mongoose.Schema({
 	title : String,
@@ -38,6 +35,10 @@ var blogSchema = mongoose.Schema({
 	created : {type:Date, default:Date.now}
 })
 var Blog = mongoose.model('Blog', blogSchema);
+
+//DB test data seed
+
+seedDB();
 
 // ROUTES
 
