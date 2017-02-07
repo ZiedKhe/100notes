@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const methodoverride = require('method-override');
 const expressSanitizer = require('express-sanitizer');
 var Campground = require('./models/campgrounds');
+
 var seedDB = require('./seeds');
 
 // MongoDB connection
@@ -25,7 +26,11 @@ app.use(methodoverride('_method'))
 	// 	{name : "Haut Lac", image : "http://s3.amazonaws.com/virginiablog/wp-content/uploads/2016/03/05154212/Mount-Rogers-and-Whitetop-Mountain.jpg"}
 	// ]
 
-//MongoDB Schema definitions
+//DB test data seed
+
+seedDB();
+
+//MongoDB Additional Schema definitions
 
 
 var blogSchema = mongoose.Schema({
@@ -36,9 +41,7 @@ var blogSchema = mongoose.Schema({
 })
 var Blog = mongoose.model('Blog', blogSchema);
 
-//DB test data seed
 
-seedDB();
 
 // ROUTES
 

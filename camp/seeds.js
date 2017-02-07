@@ -23,7 +23,11 @@ var data = [
 ]
 
 function seedDB(){
-	Campground.remove({}, function(err){
+	Comment.remove({},function(err){
+		if(err){
+			console.log(err);
+		} else {
+			Campground.remove({}, function(err){
 	if (err) {
 		console.log(err)
 	} else {
@@ -41,7 +45,7 @@ function seedDB(){
 						if(err){
 							console.log(err);
 						} else {
-							createdCamp.Comments.push(createdComment);
+							createdCamp.comments.push(createdComment);
 							createdCamp.save();
 							console.log('comment created on camp');
 						}
@@ -53,7 +57,10 @@ function seedDB(){
 
 	}
 
-})
+})	
+		}
+	})
+
 }
 
 module.exports = seedDB;
