@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const methodoverride = require('method-override');
 const expressSanitizer = require('express-sanitizer');
 var Campground = require('./models/campgrounds');
+var Comment = require('./models/comment')
 
 var seedDB = require('./seeds');
 
@@ -54,7 +55,7 @@ app.get('/campgrounds', function(req,res){
 		if(err){
 			console.log("Error while retrieving Campgrounds in the database")
 		} else {
-			res.render('campgrounds', {campgrounds : allCampgrounds})
+			res.render('campgrounds/index', {campgrounds : allCampgrounds})
 		}
 	})
 
@@ -80,7 +81,7 @@ app.post('/campgrounds', function(req,res){
 })
 
 app.get('/campgrounds/new' , function(req,res){
-	res.render('new');
+	res.render('campgrounds/new');
 })
 
 app.get('/campgrounds/:id' , function (req,res){
@@ -88,7 +89,7 @@ app.get('/campgrounds/:id' , function (req,res){
 		if(err){
 			console.log("Error while retrieving campground details")
 		} else {
-			res.render('show', {campground : foundCampground})
+			res.render('campgrounds/show', {campground : foundCampground})
 		}
 	})
 
@@ -163,6 +164,40 @@ app.delete('/blog/:id', function(req,res){
 		}
 	})
 })
+
+
+app.get('/campgrounds/:id/comments/new', function (req,res){
+	Campground.findById(req.params.id, function(err,campground){
+		if(err){
+			console.log(err);
+			res.redirect('/campgrounds')
+		} else {
+			res.render('comments/new', {campground:campground})
+
+		}
+	})
+})
+
+
+app.post('/campgrounds/:id/comments', function (req,res){
+Campground.findById(req.params.id, function(err, campground){
+	if (err){
+		console.log(err);
+		res.redirect('/campgrounds');
+	} else{
+		Comment.create(req.body.comment, function(err, comment){
+			if(err){
+				console.log(err);
+			} else {
+				campground.comments.push(comment);
+				campground.save();
+				res.redirect('/campgrounds/' +req.params.id);
+			}
+		})
+	}
+})
+})
+
 
 // SERVER
 

@@ -49,7 +49,7 @@ function seedDB(){
 							createdCamp.save();
 							console.log('comment created on camp');
 						}
-					})
+					});
 				}
 			})
 		}	)
