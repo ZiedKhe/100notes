@@ -5,19 +5,19 @@ var Comment = require('./models/comment');
 
 var data = [
 	{   
-		name :'post1',
-		image: 'https://farm9.staticflickr.com/8240/8547598637_89d7860d18.jpg',
-		description: 'super bike',
+		name :"Walnut's Creek",
+		image: 'https://images.unsplash.com/photo-1482376292551-03dfcb8c0c74?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=3b4da5252b7d4d51309b1a8d6cbd9709',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ipsam nulla ullam dicta illum officia delectus quisquam dolorum. Dolorem, ipsa harum adipisci suscipit voluptatem quod officia! Ipsum perferendis voluptatibus ut.',
 	},
 	{   
-		name :"post2",
-		image: 'https://farm9.staticflickr.com/8241/8528223650_6b401ed453.jpg',
-		description: 'nice bike',
+		name :"Ingerson valley view",
+		image: 'https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=9f4ac45782b3a59d8f1be8226bc5a98c',
+		description: 'nLorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ipsam nulla ullam dicta illum officia delectus quisquam dolorum. Dolorem, ipsa harum adipisci suscipit voluptatem quod officia! Ipsum perferendis voluptatibus ut.',
 	},
 	{   
-		name : 'post3',
-		image: 'https://farm7.staticflickr.com/6189/6045521505_47d5cc4f8a.jpg',
-		description: 'my bike',
+		name : 'Grand Canyon rest',
+		image: 'https://images.unsplash.com/photo-1465695954255-a262b0f57b40?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=37d2758ecb885811d315f4b5540c6531',
+		description: 'my bike Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet ipsam nulla ullam dicta illum officia delectus quisquam dolorum. Dolorem, ipsa harum adipisci suscipit voluptatem quod officia! Ipsum perferendis voluptatibus ut.',
 	}
 
 ]
