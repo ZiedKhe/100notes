@@ -14,7 +14,7 @@ var seedDB = require('./seeds');
 // MongoDB connection
 mongoose.connect("mongodb://localhost/facecamp");
 // Basics
-app.use(express.static(__dirname+'/public')) // serve static files in public directory
+app.use(express.static('public')) // serve static files in public directory
 app.use(bodyParser.urlencoded({extended: true})); // Add body parser
 app.use(expressSanitizer()); // MUST be placed AFTER bodyParser
 app.set ("view engine", "ejs"); // RENDERING IN EJS
