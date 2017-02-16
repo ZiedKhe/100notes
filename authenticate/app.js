@@ -37,7 +37,7 @@ app.get('/', function(req,res){
 	res.render("home")
 })
 
-app.get('/secret', function(req,res){
+app.get('/secret',isLoggedIn, function(req,res){
 	res.render('secret')
 })
 
@@ -76,6 +76,20 @@ app.post('/login', passport.authenticate(
 	function(req,res){
 
 });
+
+app.get('/logout', function(req,res){
+	req.logout();
+	res.redirect('/');
+})
+
+//Middleware to check if the user is logged in
+function isLoggedIn(req,res,next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.render('login');
+}
+
 // ============= SERVER =============
 app.listen(port,(err)=> {
 	if(err){
