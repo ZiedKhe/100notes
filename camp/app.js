@@ -6,8 +6,11 @@ const port = 3000;
 const mongoose = require('mongoose');
 const methodoverride = require('method-override');
 const expressSanitizer = require('express-sanitizer');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 var Campground = require('./models/campgrounds');
-var Comment = require('./models/comment')
+var Comment = require('./models/comment');
+var User = require('./models/user');
 
 var seedDB = require('./seeds');
 
@@ -19,6 +22,19 @@ app.use(bodyParser.urlencoded({extended: true})); // Add body parser
 app.use(expressSanitizer()); // MUST be placed AFTER bodyParser
 app.set ("view engine", "ejs"); // RENDERING IN EJS
 app.use(methodoverride('_method'))
+
+
+// PASSPORT CONFIGURATION
+app.use(require('express-session')({
+	secret :'fake for github',
+	resave : false,
+	saveUninitialized : false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // TEMPORARY TEST DATA
 	// var campgrounds = [
@@ -197,6 +213,28 @@ Campground.findById(req.params.id, function(err, campground){
 	}
 })
 })
+
+
+// ========== Authentication routes ==============
+
+app.get('/register', function (req, res){
+	res.render('register')
+});
+
+app.post('/register', function(req,res){
+	var newUser = new User({username:req.body.username});
+	User.register(newUser, req.body.password, function (err, user){
+		if(err){
+			console.log(err);
+			res.redirect('/register')
+		} else {
+			passport.authenticate("local")(req, res, function(){
+				res.redirect('/campgrounds');
+			})
+		}
+	})
+})
+
 
 
 // SERVER
